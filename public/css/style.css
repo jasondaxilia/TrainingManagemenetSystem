@@ -1,9 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+}
+
 .SideBar {
     height: 100vw;
     background-color: rgb(9, 63, 134);
     color: white;
 }
 
-li{
+li {
     list-style: none;
 }

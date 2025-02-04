@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container d-flex justify-content-center" style="width: 100%">
-        Welcome ges
+        <div class="container">Welcome Ges</div>
     </div>
 @endsection
