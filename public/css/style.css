@@ -1,0 +1,9 @@
+.SideBar {
+    height: 100vw;
+    background-color: rgb(9, 63, 134);
+    color: white;
+}
+
+li{
+    list-style: none;
+}
