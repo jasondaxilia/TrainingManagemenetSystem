@@ -27,8 +27,14 @@
                         <li><a href="/">Dashboard</a></li>
                         <li>Banner</li>
                         <li><a href="/UserRegister">Register User</a></li>
-                        <li><a href="">Profile</a></li>
-                        <li>Logout</li>
+                        <li><a href="/ManualBook">Manual Book</a></li>
+                        <li><a href="/Profile">Profile</a></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit">Logout</button>
+                            </form>
+                        </li>
 
                     </ul>
                 </div>

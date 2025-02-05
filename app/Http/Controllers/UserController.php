@@ -71,7 +71,7 @@ class UserController extends Controller
 
         // If the username exists, attempt to login by checking the password
         if (Auth::attempt($credentials)) {
-            return redirect('/Dashboard');
+            return redirect()->route('ShowDashboard');
         }
 
         // If the password is incorrect, return an error message
@@ -84,4 +84,5 @@ class UserController extends Controller
     {
         return view('/Login');
     }
+
 }

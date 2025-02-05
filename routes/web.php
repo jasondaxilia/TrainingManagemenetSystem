@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +20,18 @@ Route::get('/Login', [UserController::class, 'LoginPage'])->name('login');
 Route::post('/Login', [UserController::class, 'Login'])->name('login');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/UserRegister', [UserController::class, 'RegisterPage']);
+    Route::get('/UserRegister', [UserController::class, 'RegisterPage'])->name('RegisterPage');
     Route::post('/UserRegister', [UserController::class, 'Register']);
 
-    Route::get('/', function () {
-        return redirect('Dashboard');
-    });
+    Route::get('/', [DashboardController::class, 'ShowDashboard'])->name('ShowDashboard');
 
     Route::get('/Dashboard', function () {
-        return view('Dashboard');
+        return redirect()->route('ShowDashboard');
     });
+
 });
+
+Route::post('/Logout', function () {
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');

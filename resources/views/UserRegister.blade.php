@@ -11,6 +11,16 @@
                         <form method="POST" action="/UserRegister" enctype="multipart/form-data">
                             @csrf
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <!-- Name -->
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
@@ -55,16 +65,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
 
                             <!-- Password -->
                             <div class="row mb-3">
