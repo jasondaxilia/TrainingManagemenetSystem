@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,10 +22,10 @@ class UserController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
             'role' => 'required|string|in:user,admin',
             'phone_number' => 'nullable|string|max:20',
-            'company' => 'nullable|string|max:255',
+            'company' => 'required|exists:companies,id',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -32,6 +33,7 @@ class UserController extends Controller
         if ($request->hasFile('profile_picture')) {
             $profilePicturePath = $request->file('profile_picture')->store('profile_pictures', 'public');
         }
+        $companies = Company::all();
 
         User::create([
             'username' => $request->username,
@@ -40,18 +42,19 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'phone_number' => $request->phone_number,
-            'company' => $request->company,
+            'company_id' => $request->company,
             'profile_picture' => $profilePicturePath, // Store profile picture path
         ]);
 
         // dd($request->all());
 
-        return redirect('/Dashboard')->with('success', 'Registration successful!');
+        return view('UserRegister', compact('companies'))->with('success', 'Registration successful!');
     }
 
     public function RegisterPage()
     {
-        return view('/UserRegister');
+        $companies = Company::all();
+        return view('UserRegister', compact('companies'));
     }
 
 
