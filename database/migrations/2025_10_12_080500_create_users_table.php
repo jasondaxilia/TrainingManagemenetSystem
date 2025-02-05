@@ -14,13 +14,15 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('date_of_birth');
             $table->string('phone_number');
-            $table->string('profile_picture')->nullable();
             $table->enum('role', ['admin', 'user'])->default('user');
-            $table->rememberToken();
-            $table->timestamps();
             $table->foreignId('company_id')->constrained('companies')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('profile_picture')->nullable();
+
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamps();
+            $table->rememberToken();
         });
     }
 
