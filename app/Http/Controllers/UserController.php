@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -53,4 +54,34 @@ class UserController extends Controller
         return view('/UserRegister');
     }
 
+
+    public function Login(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        // Check if the username exists in the database
+        $user = User::where('username', $request->username)->first();
+
+        // If the username doesn't exist, return an error message
+        if (!$user) {
+            return back()->withErrors([
+                'username' => 'Username tidak terdaftar'
+            ])->withInput();
+        }
+
+        // If the username exists, attempt to login by checking the password
+        if (Auth::attempt($credentials)) {
+            return redirect('/Dashboard');
+        }
+
+        // If the password is incorrect, return an error message
+        return back()->withErrors([
+            'password' => 'Password salah'
+        ])->withInput();
+    }
+
+    public function LoginPage()
+    {
+        return view('/Login');
+    }
 }

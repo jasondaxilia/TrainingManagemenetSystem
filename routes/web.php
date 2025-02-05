@@ -14,12 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Dashboard');
-});
-Route::get('/Dashboard', function () {
-    return view('Dashboard');
-});
+Route::get('/Login', [UserController::class, 'LoginPage'])->name('login');
+Route::post('/Login', [UserController::class, 'Login'])->name('login');
 
-Route::get('/UserRegister', [UserController::class, 'RegisterPage']);
-Route::post('/UserRegister', [UserController::class, 'Register']);
+Route::middleware('auth')->group(function () {
+    Route::get('/UserRegister', [UserController::class, 'RegisterPage']);
+    Route::post('/UserRegister', [UserController::class, 'Register']);
+
+    Route::get('/', function () {
+        return redirect('Dashboard');
+    });
+
+    Route::get('/Dashboard', function () {
+        return view('Dashboard');
+    });
+});
