@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.Admin')
 
 @section('content')
     <div class="container mt-5">
@@ -8,7 +8,7 @@
                     <div class="card-header">User Register</div>
 
                     <div class="card-body">
-                        <form method="POST" action="/UserRegister" enctype="multipart/form-data">
+                        <form method="POST" action="UserRegister" enctype="multipart/form-data">
                             @csrf
 
                             @if ($errors->any())
@@ -81,14 +81,14 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Confirm
                                     Password</label>
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Role -->
                             <div class="row mb-3">
@@ -108,7 +108,7 @@
                             </div>
 
                             <!-- Company -->
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="company"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Company') }}</label>
                                 <div class="col-md-6">
@@ -121,7 +121,32 @@
                                         </span>
                                     @enderror
                                 </div>
+                            </div> --}}
+                            <div class="row mb-3">
+                                <label for="company"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Company') }}</label>
+                                <div class="col-md-6">
+                                    <!-- Dropdown for selecting a company -->
+                                    <select id="company" name="company"
+                                        class="form-control @error('company') is-invalid @enderror">
+                                        <option value="">Select a company</option>
+                                        @foreach ($companies as $company)
+                                            <option value="{{ $company->id }}"
+                                                {{ old('company') == $company->id ? 'selected' : '' }}>
+                                                {{ $company->company_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('company')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
+
+
 
                             <!-- Phone Number -->
                             <div class="row mb-3">

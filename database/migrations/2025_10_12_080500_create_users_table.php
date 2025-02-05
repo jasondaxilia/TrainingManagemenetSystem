@@ -5,11 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -20,19 +16,14 @@ return new class extends Migration {
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_number');
-            $table->string('company');
             $table->string('profile_picture')->nullable();
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignId('company_id')->constrained('companies')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('users');
