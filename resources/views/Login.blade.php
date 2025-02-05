@@ -16,11 +16,10 @@
 </head>
 
 <body>
-    <div class="container card d-flex p-5">
+    <div class="container LoginForm card d-flex p-5">
         <div class="row justify-content-center">Login</div>
         <form action="/Login" method="POST">
             @csrf
-
             <div class="row mb-3">
                 <label for="username" class="col-md-4 col-form-label text-md-end">Username</label>
                 <div class="col-md-5">
@@ -38,7 +37,6 @@
                 <div class="col-md-5">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                         name="password" required>
-                    {{-- required autocomplete="new-password"> --}}
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

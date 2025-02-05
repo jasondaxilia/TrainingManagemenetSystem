@@ -24,7 +24,7 @@
                 </div>
                 <div class="row p-3">
                     <ul>
-                        <li><a href="/">Dashboard</a></li>
+                        <li><a href="{{ route('ShowDashboard') }}">Dashboard</a></li>
                         <li><a href="/ManualBook">Manual Book</a></li>
                         <li><a href="/Profile">Profile</a></li>
                         <li>

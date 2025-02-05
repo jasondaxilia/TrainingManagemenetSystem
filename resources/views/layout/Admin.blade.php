@@ -18,26 +18,25 @@
 <body>
     <div class="d-flex">
         <div class="SideBar container col-2 m-0">
-            <div class="container">
-                <div class="row p-3 h4">
-                    Training <br> Management <br> System
-                </div>
-                <div class="row p-3">
-                    <ul>
-                        <li><a href="/">Dashboard</a></li>
-                        <li>Banner</li>
-                        <li><a href="/UserRegister">Register User</a></li>
-                        <li><a href="/ManualBook">Manual Book</a></li>
-                        <li><a href="/Profile">Profile</a></li>
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit">Logout</button>
-                            </form>
-                        </li>
+            <div class="row p-3 h4">
+                Training <br> Management <br> System
+            </div>
+            <div class="row p-3">
+                <ul class="m-0 p-0">
+                    <li><a href="{{ route('ShowDashboard') }}">Dashboard</a></li>
+                    <li>Banner</li>
+                    <li><a href="{{ route('RegisterPage') }}">Register User</a></li>
+                    <li><a href="/Company">Company</a></li>
+                    <li><a href="/ManualBook">Manual Book</a></li>
+                    <li><a href="/Profile">Profile</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
 
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
         @yield('content')
