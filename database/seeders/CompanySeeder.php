@@ -17,7 +17,7 @@ class CompanySeeder extends Seeder
     public function run()
     {
         Company::create([
-            'company_name' => 'Sanyo',
+            'company_name' => 'Pencari Cinta Sejati',
             'company_address' => 'Dimana kek',
         ]);
     }
