@@ -5,9 +5,13 @@
     font-optical-sizing: auto;
 }
 
+/* .logo {
+    padding: 20px;
+} */
+
 .SideBar {
     height: 100vh;
-    background-color: rgb(9, 63, 134);
+    background-color: #344cb7;
     color: white;
 }
 
@@ -27,4 +31,34 @@ li {
 }
 .card-registration .select-arrow {
     top: 13px;
+}
+
+Table {
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.btn {
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    text-align: start;
+}
+
+.btn:hover {
+    background-color: #000957;
+}
+
+#carousel {
+    background-color: black;
+    object-fit: contain;
+}
+
+.edit_profile {
+    color: black;
+}
+
+.edit_profile:hover {
+    color: white;
 }
