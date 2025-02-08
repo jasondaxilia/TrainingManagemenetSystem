@@ -3,7 +3,9 @@
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ManualBookController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RickAndMortyApiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -18,10 +20,6 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('ShowDashboard');
     })->name('Dashboard');
 
-    //Profile
-    Route::get('/Profile', [ProfileController::class, 'ShowProfile'])->name('ShowProfile');
-    Route::get('/EditProfilePicture', [ProfileController::class, 'EditProfilePicture'])->name('EditProfilePicture');
-
     //Banner
     Route::get('/Banner', [BannerController::class, 'ShowBanner'])->name('ShowBanner');
     Route::get('/AddBanner', [BannerController::class, 'AddBannerPage'])->name('AddBannerPage')->middleware('CheckAdmin');
@@ -34,13 +32,29 @@ Route::middleware('auth')->group(function () {
     Route::get('/UserRegister', [UserController::class, 'RegisterPage'])->name('RegisterPage')->middleware('CheckAdmin');
     Route::post('/UserRegister', [UserController::class, 'Register'])->name('UserRegister')->middleware('CheckAdmin');
 
-    //Company Route
+    //Company
     Route::get('/Company', [CompanyController::class, 'ShowCompany'])->name('CompanyPage')->middleware('CheckAdmin');
     Route::get('/AddCompany', [CompanyController::class, 'AddCompanyPage'])->name('AddCompanyPage')->middleware('CheckAdmin');
     Route::post('/AddCompany', [CompanyController::class, 'AddCompany'])->name('AddCompany')->middleware('CheckAdmin');
     Route::get('/Company/{id}/edit', [CompanyController::class, 'EditCompanyPage'])->name('EditCompanyPage')->middleware('CheckAdmin');
     Route::post('/Company/{id}/update', [CompanyController::class, 'UpdateCompany'])->name('EditCompany')->middleware('CheckAdmin');
     Route::delete('/Company/{id}', [CompanyController::class, 'DeleteCompany'])->name('DeleteCompany')->middleware('CheckAdmin');
+
+    //Manual Book
+    Route::get('/ManualBook', [ManualBookController::class, 'ShowManualBook'])->name('ShowManualBook');
+    Route::get('/AddManualBook', [ManualBookController::class, 'AddManualBookPage'])->name('AddManualBookPage');
+    Route::post('/AddManualBook', [ManualBookController::class, 'AddManualBook'])->name('AddManualBook');
+    Route::get('/ManualBook/{id}/edit', [ManualBookController::class, 'EditManualBookPage'])->name('EditManualBookPage');
+    Route::get('/ManualBook/{id}/Detail', [ManualBookController::class, 'DetailManualBookPage'])->name('DetailManualBookPage');
+    Route::post('/ManualBook/{id}/update', [ManualBookController::class, 'EditManualBook'])->name('EditManualBook');
+    Route::delete('/ManualBook/{id}', [ManualBookController::class, 'DeleteManualBook'])->name('DeleteManualBook');
+
+    //Profile
+    Route::get('/Profile', [ProfileController::class, 'ShowProfile'])->name('ShowProfile');
+    Route::get('/EditProfilePicture', [ProfileController::class, 'EditProfilePicture'])->name('EditProfilePicture');
+
+    //Rick and Morty API
+    Route::get('/RickAndMortyApi', [RickAndMortyApiController::class, 'ShowApi'])->name('ShowApi')->middleware('CheckAdmin');
 
     //Logout
     Route::post('/Logout', function () {
