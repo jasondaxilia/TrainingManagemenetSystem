@@ -25,18 +25,18 @@
                 <div class="row p-3">
                     <ul class="m-0 p-0">
                         <li>
-                            <a class="btn" href="{{ route('ShowDashboard') }}">Dashboard</a>
+                            <a class="btn DashboardButton" href="{{ route('ShowDashboard') }}">Dashboard</a>
                         </li>
                         <li>
-                            <a class="btn" href="{{ route('ShowBanner') }}">Manual Book</a>
+                            <a class="btn DashboardButton" href="{{ route('ShowManualBook') }}">Manual Book</a>
                         </li>
                         <li>
-                            <a class="btn" href="{{ route('ShowProfile') }}">Profile</a>
+                            <a class="btn DashboardButton" href="{{ route('ShowProfile') }}">Profile</a>
                         </li>
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button class="btn" type="submit">Logout</button>
+                                <button class="btn DashboardButton" type="submit">Logout</button>
                             </form>
                         </li>
 
