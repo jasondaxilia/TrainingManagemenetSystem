@@ -16,41 +16,43 @@
 </head>
 
 <body>
-    <div class="container LoginForm card d-flex p-5">
-        <div class="row justify-content-center">Login</div>
-        <form action="/Login" method="POST">
-            @csrf
-            <div class="row mb-3">
-                <label for="username" class="col-md-4 col-form-label text-md-end">Username</label>
-                <div class="col-md-5">
-                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
-                        name="username" value="{{ old('username') }}" required>
-                    @error('username')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+    <div class="container p-5 d-flex justify-content-center" style="height: 100vh">
+        <div class="card  w-75 align-self-center p-3">
+            <div class="row justify-content-center mb-3 h2">Login</div>
+            <div class="row justify-content-center mb-3 h2">TrainingManagementSystem</div>
+            <form action="/Login" method="POST">
+                @csrf
+                <div class="row mb-3">
+                    <label for="username" class="col-md-4 col-form-label text-md-end"><strong>Username</strong></label>
+                    <div class="col-md-5">
+                        <input id="username" type="text"
+                            class="form-control @error('username') is-invalid @enderror" name="username"
+                            value="{{ old('username') }}" required>
+                        @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
-                <div class="col-md-5">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                        name="password" required>
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                <div class="row mb-3">
+                    <label for="password" class="col-md-4 col-form-label text-md-end"><strong>Password</strong></label>
+                    <div class="col-md-5">
+                        <input id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror" name="password" required>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-            </div>
-
-            <div class=" d-flex justify-content-center">
-                <button class="btn btn-primary " type="submit">Login</button>
-            </div>
-        </form>
+                <div class="row d-flex mb-3 justify-content-center d-block">
+                    <button class="btn btn-primary col-md-2" type="submit"><strong>Login</strong></button>
+                </div>
+            </form>
+        </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
