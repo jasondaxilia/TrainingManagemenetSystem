@@ -10,13 +10,10 @@
 } */
 
 .SideBar {
+    /* position: fixed; */
     height: 100vh;
     background-color: #344cb7;
     color: white;
-}
-
-.LoginForm {
-    margin-top: 35vh;
 }
 
 li {
@@ -39,14 +36,13 @@ Table {
     border-radius: 5px;
 }
 
-.btn {
-    width: 100%;
+.DashboardButton {
     color: white;
     text-decoration: none;
     text-align: start;
 }
 
-.btn:hover {
+.DashboardButton:hover {
     background-color: #000957;
 }
 
@@ -61,4 +57,11 @@ Table {
 
 .edit_profile:hover {
     color: white;
+}
+
+input {
+    field-sizing: content;
+    min-block-size: 1rlh;
+    min-inline-size: 20ch;
+    max-inline-size: 50ch;
 }
