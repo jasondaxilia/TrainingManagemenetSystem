@@ -18,6 +18,7 @@ class CompanySeeder extends Seeder
     {
         Company::create([
             'company_name' => 'Pencari Cinta Sejati',
+            'company_code' => 'PCS101',
             'company_address' => 'Dimana kek',
         ]);
     }

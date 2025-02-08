@@ -11,8 +11,8 @@ class CompanyController extends Controller
 {
     public function ShowCompany()
     {
-        $companies = Company::all();
-        return view('/Company', compact('companies'));
+        $companies = Company::withCount('user')->get();
+        return view('Company.Company', compact('companies'));
     }
 
     public function AddCompany(Request $request)
@@ -20,20 +20,23 @@ class CompanyController extends Controller
         $request->validate([
             'company_name' => 'required|string|max:255|unique:companies',
             'company_address' => 'required|string|max:255|unique:companies',
+            'company_code' => 'required|string|max:255|unique:companies',
         ]);
 
         Company::create([
             'company_name' => $request->company_name,
             'company_address' => $request->company_address,
+            'company_code' => $request->company_code,
         ]);
 
-        return redirect('/Company')->with('success', 'Add Company successful!');
+        $companies = Company::withCount('user')->get();
+        return view('Company.Company', compact('companies'))->with('success', 'Add Company successful!');
     }
 
     // show view addcompany
     public function AddCompanyPage()
     {
-        return view('/AddCompany');
+        return view('Company.AddCompany');
     }
 
     // edit data company
@@ -57,10 +60,10 @@ class CompanyController extends Controller
 
         $company->save();
 
-        return redirect('/Company')->with('success', 'Company Update Succesfull');
+        return redirect('/Company/Company')->with('success', 'Company Update Succesfull');
     }
 
-    public function Destroy($id)
+    public function DeleteCompany($id)
     {
         $company = Company::findOrFail($id);
         $company->delete();

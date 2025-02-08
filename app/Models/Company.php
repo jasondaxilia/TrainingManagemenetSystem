@@ -13,6 +13,7 @@ class Company extends Model
     protected $fillable = [
         'company_name',
         'company_address',
+        'company_code',
     ];
 
     public function user(): HasMany
