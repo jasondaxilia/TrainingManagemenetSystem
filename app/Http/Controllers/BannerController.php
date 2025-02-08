@@ -21,50 +21,53 @@ class BannerController extends Controller
 
     public function AddBanner(Request $request)
     {
-        // dd($request->file('banner_image'));
-
         $request->validate([
             'banner_name' => 'required|string|max:255|unique:banners',
-            'banner_link' => 'required|string|max:255|unique:banners',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:10240',
         ]);
-
-
-        // dd($request->banner_image);
-
         $bannerImagePath = null;
         if ($request->hasFile('banner_image')) {
             $bannerImagePath = $request->file('banner_image')->store('banner_images', 'public');
         }
-
         Banner::create([
             'banner_name' => $request->banner_name,
-            'banner_link' => $request->banner_link,
             'banner_image' => $bannerImagePath,
         ]);
-
-        return view('Banner.Banner')->with('success', 'input image success');
+        $banners = Banner::all();
+        return view('Banner.Banner', compact('banners'))->with('success', 'input image success');
     }
 
-    public function EditBannerPage()
+    public function EditBannerPage($id)
     {
-        return view('Banner.EditBanner');
+        $banner = Banner::findOrFail($id);
+        return view('Banner.EditBanner', compact('banner'));
     }
 
     public function UpdateBanner(Request $request, $id)
     {
-        $request->validate([
-            'banner_name' => 'required|string|max:255|unique:banners,banner_name,' . $id,
-            'banner_address' => 'required|string|max:255',
-        ]);
-
         $banner = Banner::findOrFail($id);
 
-        $banner->banner_name = $request->banner_name;
-        $banner->banner_address = $request->banner_link;
+        $validate_data = $request->validate([
+            'banner_name' => 'required|string|max:255|unique:banners,banner_name,' . $id,
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+        ]);
+
+        $banner->banner_name = $validate_data['banner_name'];
+
+        if ($request->hasFile('banner_image')) {
+            // Delete the old image if it exists
+            if ($banner->image && file_exists(public_path('storage/' . $banner->banner_image))) {
+                unlink(public_path('storage/' . $banner->banner_image));
+            }
+
+            // Store the new image
+            $imagePath = $request->file('banner_image')->store('banners', 'public');
+
+            // Update the banner image path
+            $banner->banner_image = $imagePath;
+        }
 
         $banner->save();
-
         return redirect('/Banner')->with('success', 'Banner Update Succesfull');
     }
 
