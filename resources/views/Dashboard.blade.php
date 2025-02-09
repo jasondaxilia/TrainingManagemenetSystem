@@ -8,7 +8,7 @@
     <div class="container">
         <h1>Welcome {{ $user->name }}</h1>
         <div class="row justify-content-center">
-            <div id="bannerCarousel" class="carousel slide col-md-5 mb-5" data-bs-ride="carousel">
+            <div id="bannerCarousel" class="w-100 h-50 carousel slide col-md-5 mb-5" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     @foreach ($banners as $banner)
                         <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="{{ $loop->index }}"

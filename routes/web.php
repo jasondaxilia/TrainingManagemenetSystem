@@ -51,7 +51,8 @@ Route::middleware('auth')->group(function () {
 
     //Profile
     Route::get('/Profile', [ProfileController::class, 'ShowProfile'])->name('ShowProfile');
-    Route::get('/EditProfilePicture', [ProfileController::class, 'EditProfilePicture'])->name('EditProfilePicture');
+    Route::get('/EditProfile/{id}', [ProfileController::class, 'EditProfile'])->name('EditProfile');
+    Route::put('/UpdateProfile/{id}', [ProfileController::class, 'UpdateProfile'])->name('UpdateProfile');
 
     //Rick and Morty API
     Route::get('/RickAndMortyApi', [RickAndMortyApiController::class, 'ShowApi'])->name('ShowApi')->middleware('CheckAdmin');

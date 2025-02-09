@@ -3,24 +3,27 @@
 @section('content')
     <div class="container mt-5">
         <div class=" card row align-items-center mt-5 p-5">
+            <div class="row justify-content-center h1 mb-3">
+                {{ $user->role . ' ' . 'Profile' }}
+            </div>
             <div class="col-lg-6">
                 <div class="d-flex justify-content-center">
                     @if ($user->username == 'jede')
                         <img src="{{ asset('storage/profile_pictures/cowboypatrick.png') }}" alt="tes Profile Picture"
                             class="border-2 rounded-circle" width="300">
                     @elseif ($user->profile_picture)
-                        <img src="{{ asset('storage/profile_pictures/' . $user->profile_picture) }}" alt="tes Profile Picture"
-                            class="border-2 rounded-circle" width="300">
+                        <img src="{{ asset('storage/profile_pictures/' . $user->profile_picture) }}"
+                            alt="{{ $user->name }}'s Profile Picture" class="border-2 rounded-circle" width="300">
                     @else
-                        <img src="{{ asset('storage/profile_pictures/Default-Profile-Icon.png') }}" alt="Profile Picture"
-                            class="border-2 rounded-circle" width="300">
+                        <img src="{{ asset('storage/profile_pictures/Default-Profile-Icon.png') }}"
+                            alt="{{ $user->name }}'s Profile Picture" class="border-2 rounded-circle" width="300">
                     @endif
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="">
                     <h3 class="text-center mt-5 mb-2">Hi {{ $user->name }}!</h3>
-                    <div class="row ">
+                    <div class="row text-center">
                         <div class="col-md-6">
                             <div class="Profile">
                                 <label>Date of Birth</label>
@@ -45,9 +48,9 @@
                                 <p>{{ $user->phone_number }}</p>
                             </div>
                             <div class="Profile">
-                                <a href="{{ route('EditProfilePicture') }}" class="btn d-inline edit_profile">Edit Profile
-                                    Picture</a>
-                                <form action=""></form>
+                                <a href="{{ route('EditProfile', $user->id) }}" class="btn d-inline edit_profile"
+                                    style="">Edit
+                                    Profile</a>
                             </div>
                         </div>
                     </div>

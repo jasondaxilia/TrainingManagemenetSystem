@@ -35,7 +35,8 @@
                         </td>
                         <td>{{ $manual_book->manual_book_writer }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('DetailManualBookPage', $manual_book->id) }}">Detail</a>
+                            <a class="btn btn-primary"
+                                href="{{ route('DetailManualBookPage', $manual_book->id) }}">Detail</a>
                             @if ($user->role == 'admin')
                                 <a class="btn btn-secondary"
                                     href="{{ route('EditManualBookPage', $manual_book->id) }}">Edit</a>
