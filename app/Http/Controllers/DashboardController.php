@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $user_count = User::count();
         $company_count = Company::count();
         $banner_count = Banner::count();
-        $banners = Banner::all();
+        $banners = Banner::orderBy('created_at', 'desc')->take(3)->get();
 
         $users = User::all();
         $birthday = [];
@@ -45,7 +45,7 @@ class DashboardController extends Controller
             return $a['days_left'] <=> $b['days_left'];
         });
 
-        $closestBirthdays = array_slice($birthdays, 0, 3);
+        $closestBirthdays = array_slice($birthdays, 0, 6);
 
         return view('Dashboard', compact('closestBirthdays', 'user', 'banners', 'user_count', 'company_count', 'banner_count'));
     }

@@ -50,8 +50,8 @@
 
         <div class="row h1 d-flex justify-content-center mt-5"> On Going Event</div>
 
-        <div class="row">
-            <div id="bannerCarousel" class="carousel slide col-md-8 mb-5 h-100 p-0" data-bs-ride="carousel">
+        <div class="row" style="height: max-content;">
+            <div id="bannerCarousel" class="carousel slide col-md-8 p-0" data-bs-ride="carousel" style="height: 400px">
                 <div class="carousel-indicators">
                     @foreach ($banners as $banner)
                         <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="{{ $loop->index }}"
@@ -64,18 +64,18 @@
                         <div class="carousel-item @if ($loop->first) active @endif">
                             @if ($banner->link)
                                 <a href="{{ $banner->link }}">
-                                    <img src="{{ asset('storage/' . $banner->banner_image) }}" class="d-block w-100"
-                                        alt="{{ $banner->title ?? 'Banner Image' }}">
+                                    <img id="banner_image" src="{{ asset('storage/' . $banner->banner_image) }}"
+                                        class="d-flex" alt="{{ $banner->title }}">
                                 </a>
                             @else
-                                <img src="{{ asset('storage/' . $banner->banner_image) }}" class="d-block w-100"
-                                    alt="{{ $banner->title ?? 'Banner Image' }}">
+                                <img id="banner_image" src="{{ asset('storage/' . $banner->banner_image) }}" class="d-block"
+                                    alt="{{ $banner->title }}">
                             @endif
-                            @if ($banner->title)
+                            {{-- @if ($banner->title)
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{ $banner->title }}</h5>
                                 </div>
-                            @endif
+                            @endif --}}
                         </div>
                     @endforeach
                 </div>
@@ -88,24 +88,29 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <div class="card col-md-4 justify-content-center">
-                <div class="card-header">Closest Birthday</div>
-                <div class="card-body">
-                    @if (count($closestBirthdays) > 0)
-                        <ul>
+            <div class="card col-md-4 p-0">
+                <div class="card-header d-flex justify-content-center p-0">
+                    <strong>Closest Birthday</strong>
+                </div>
+                @if (count($closestBirthdays) > 0)
+                    <div class="card-body p-3 m-0">
+                        <div class="container h-100"
+                            style="display: flex;flex-direction: column ;justify-content: space-evenly">
                             @foreach ($closestBirthdays as $birthday)
-                                <li>
-                                    <strong>{{ $birthday['user']->name }} <br> </strong>
+                                <div class="">
+                                    <strong>
+                                        {{ $birthday['user']->name }}
+                                    </strong>
                                     Birthday:
                                     {{ \Carbon\Carbon::parse($birthday['user']->date_of_birth)->format('j F Y') }}
-                                    <br>
-                                </li>
+                                </div>
                             @endforeach
-                        </ul>
-                    @else
-                        <p>No birthdays available.</p>
-                    @endif
-                </div>
+                        </div>
+                    </div>
+                @else
+                    <p>No birthdays available.</p>
+                @endif
+
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@
                 <div class="d-flex justify-content-center">
                     @if ($user->profile_picture)
                         <img src="{{ asset('storage/' . $user->profile_picture) }}"
-                            alt="{{ $user->name }}'s Profile Picture" class="border-2" width="300">
+                            alt="{{ $user->name }}'s Profile Picture" class="border-2 rounded-circle" width="300">
                     @else
                         <img src="{{ asset('storage/Default-Profile-Icon.png') }}"
                             alt="{{ $user->name }}'s Profile Picture" class="border-2 rounded-circle" width="300">

@@ -53,6 +53,18 @@ Table {
     /* width: 70%; */
 }
 
+.carousel-inner {
+    /* display: flex; */
+    height: 400px;
+    object-fit: cover;
+}
+
+#banner_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .edit_profile {
     color: black;
 }
