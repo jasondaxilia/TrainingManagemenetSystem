@@ -7,11 +7,14 @@
 
     <div class="container">
         <h1>Manual Book</h1>
-        <button class="btn btn-success mb-3">
-            <a href="{{ route('AddManualBookPage') }}" style="text-decoration: none; color: white;">
-                Add Manual Book
-            </a>
-        </button>
+
+        @if ($user->role == 'admin')
+            <button class="btn btn-success mb-3">
+                <a href="{{ route('AddManualBookPage') }}" style="text-decoration: none; color: white;">
+                    Add Manual Book
+                </a>
+            </button>
+        @endif
         <table id="manualbookTable" class="table table-hover display w-100 p-5">
             <thead>
                 <tr class="text-center">
