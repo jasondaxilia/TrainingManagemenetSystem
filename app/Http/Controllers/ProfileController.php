@@ -20,29 +20,29 @@ class ProfileController extends Controller
         return view('Profile.Profile', compact('user', 'company'));
     }
 
-    public function EditProfile()
+    public function EditProfile($id)
     {
-        $user = Auth::user();
-        $company = $user->company;
-        return view('Profile.EditProfile', compact('user', 'company'));
+        $user = User::findOrFail($id);
+        // $company = $user->company;
+        return view('Profile.EditProfile', compact('user'));
     }
 
     public function UpdateProfile(Request $request, $id)
     {
-        // $user = Auth::user();
         $user = User::findOrFail($id);
 
         // dd($request->all());
 
         $request->validate([
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'username' => 'nullable|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'nullable|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8',
             'phone_number' => 'nullable|string|max:20',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $user->username = $request->input('username');
+        if ($request->username)
+            $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
 
@@ -55,17 +55,11 @@ class ProfileController extends Controller
             $path = $request->file('profile_picture')->store('profile_pictures', 'public');
             $user->profile_picture = $path;
         }
-
-        // $user->save();
-
-        if ($user->save()) {
-            // Successfully saved
-            return view('user-register');
-        } else {
-            // Handle the failure case
-            dd($request->all());
-        }
         $company = $user->company;
-        return view('ShowProfile', compact('user', 'company'))->with('success', 'Profile updated successfully!');
+
+        $user->save();
+
+        return redirect()->route('ShowProfile', compact('user', 'company'))->with('success', 'Profile updated successfully!');
+        // return view('Profile.Profile', compact('user', 'company'))->with('success', 'Profile updated successfully!');
     }
 }

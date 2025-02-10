@@ -8,26 +8,23 @@
             </div>
             <div class="col-lg-6">
                 <div class="d-flex justify-content-center">
-                    @if ($user->username == 'jede')
-                        <img src="{{ asset('storage/profile_pictures/cowboypatrick.png') }}" alt="tes Profile Picture"
-                            class="border-2 rounded-circle" width="300">
-                    @elseif ($user->profile_picture)
-                        <img src="{{ asset('storage/profile_pictures/' . $user->profile_picture) }}"
-                            alt="{{ $user->name }}'s Profile Picture" class="border-2 rounded-circle" width="300">
+                    @if ($user->profile_picture)
+                        <img src="{{ asset('storage/' . $user->profile_picture) }}"
+                            alt="{{ $user->name }}'s Profile Picture" class="border-2" width="300">
                     @else
-                        <img src="{{ asset('storage/profile_pictures/Default-Profile-Icon.png') }}"
+                        <img src="{{ asset('storage/Default-Profile-Icon.png') }}"
                             alt="{{ $user->name }}'s Profile Picture" class="border-2 rounded-circle" width="300">
                     @endif
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="">
-                    <h3 class="text-center mt-5 mb-2">Hi {{ $user->name }}!</h3>
+                    <h3 class="text-center mt-5 mb-2">Hi {{ $user->username }}!</h3>
                     <div class="row text-center">
                         <div class="col-md-6">
                             <div class="Profile">
-                                <label>Date of Birth</label>
-                                <p>{{ \Carbon\Carbon::parse($user->date_of_birth)->format('d-m-Y') }}</p>
+                                <label>Username</label>
+                                <p>{{ $user->username }}</p>
                             </div>
                             <div class="Profile">
                                 <label>Name</label>
@@ -48,12 +45,15 @@
                                 <p>{{ $user->phone_number }}</p>
                             </div>
                             <div class="Profile">
-                                <a href="{{ route('EditProfile', $user->id) }}" class="btn d-inline edit_profile"
-                                    style="">Edit
-                                    Profile</a>
+                                <label>Date of Birth</label>
+                                <p>{{ \Carbon\Carbon::parse($user->date_of_birth)->format('d-m-Y') }}</p>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="Profile text-center">
+                    <a href="{{ route('EditProfile', $user->id) }}" class="btn d-inline edit_profile" style="">Edit
+                        Profile</a>
                 </div>
             </div>
 

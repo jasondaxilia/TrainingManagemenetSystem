@@ -6,12 +6,9 @@
             <div class="row align-self-center h2 my-4">Edit Profile</div>
             <div class="col-lg-6 d-flex justify-content-center w-100">
                 <div class="d-flex justify-content-center">
-                    @if ($user->username == 'jede')
-                        <img src="{{ asset('storage/profile_pictures/cowboypatrick.png') }}" alt="tes Profile Picture"
+                    @if ($user->profile_picture)
+                        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="tes Profile Picture"
                             class="border-2 rounded-circle" width="300">
-                    @elseif ($user->profile_picture)
-                        <img src="{{ asset('storage/profile_pictures/' . $user->profile_picture) }}"
-                            alt="tes Profile Picture" class="border-2 rounded-circle" width="300">
                     @else
                         <img src="{{ asset('storage/profile_pictures/Default-Profile-Icon.png') }}" alt="Profile Picture"
                             class="border-2 rounded-circle" width="300">
@@ -20,18 +17,17 @@
             </div>
             <div class="col-lg-6 d-flex flex-col justify-content-center w-100">
                 <div class="row my-5">
-                    <form method="PUT" action="{{ route('UpdateProfile', $user->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('UpdateProfile', $user->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <label for="name" class="col-md-6 col-form-label text-md-right">{{ __('Name') }}</label>
-
+                            <label for="username" class="col-md-6 col-form-label text-md-right">{{ __('Username') }}</label>
                             <div class="col-md-6">
-                                <input id="name" type="text"
-                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name', auth()->user()->name) }}" autofocus>
+                                <input id="username" type="text"
+                                    class="form-control @error('username') is-invalid @enderror" name="username"
+                                    value="{{ old('username', auth()->user()->username) }}" autofocus>
 
-                                @error('name')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
