@@ -17,7 +17,7 @@
 
 <body>
     <div class="d-flex">
-        <div class="SideBar container col-2 m-0">
+        <div class="SideBar container col-2 m-0 min-vh-100">
             <div class="container">
                 <div class="logo row p-4 h4">
                     Training <br> Management <br> System

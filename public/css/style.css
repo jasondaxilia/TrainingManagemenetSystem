@@ -5,13 +5,14 @@
     font-optical-sizing: auto;
 }
 
-/* .logo {
-    padding: 20px;
-} */
+body {
+    background-color: #f5f5f5;
+    /* background-color: white; */
+}
 
 .SideBar {
     /* position: fixed; */
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #344cb7;
     color: white;
 }
@@ -46,9 +47,10 @@ Table {
     background-color: #000957;
 }
 
-#carousel {
+#bannerCarousel {
     background-color: black;
-    object-fit: contain;
+    object-fit: cover;
+    /* width: 70%; */
 }
 
 .edit_profile {

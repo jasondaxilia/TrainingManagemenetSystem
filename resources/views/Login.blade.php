@@ -22,9 +22,9 @@
             <div class="row justify-content-center mb-3 h2">TrainingManagementSystem</div>
             <form action="/Login" method="POST">
                 @csrf
-                <div class="row mb-3">
-                    <label for="username" class="col-md-4 col-form-label text-md-end"><strong>Username</strong></label>
-                    <div class="col-md-5">
+                <div class="row mb-3 justify-content-center">
+                    <label for="username" class="col-md-2 col-form-label text-md-end"><strong>Username</strong></label>
+                    <div class="col-md-3">
                         <input id="username" type="text"
                             class="form-control @error('username') is-invalid @enderror" name="username"
                             value="{{ old('username') }}" required>
@@ -35,9 +35,9 @@
                         @enderror
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="password" class="col-md-4 col-form-label text-md-end"><strong>Password</strong></label>
-                    <div class="col-md-5">
+                <div class="row mb-3 justify-content-center">
+                    <label for="password" class="col-md-2 col-form-label text-md-end"><strong>Password</strong></label>
+                    <div class="col-md-3">
                         <input id="password" type="password"
                             class="form-control @error('password') is-invalid @enderror" name="password" required>
                         @error('password')

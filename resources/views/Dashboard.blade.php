@@ -6,9 +6,52 @@
 
 @section('content')
     <div class="container">
-        <h1>Welcome {{ $user->name }}</h1>
-        <div class="row justify-content-center">
-            <div id="bannerCarousel" class="w-100 h-50 carousel slide col-md-5 mb-5" data-bs-ride="carousel">
+        <div class="row">
+            <div class="card h1 text-start p-2">
+                <strong>Welcome, <br> {{ $user->username }}</strong>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-evenly">
+            <div class="card col-md-4 text-start">
+                <div>
+                    <strong>Total User</strong>
+                </div>
+                <div>
+                    <strong>
+                        {{ $user_count }}
+                    </strong>
+                </div>
+            </div>
+            <div class="card col-md-4 text-start">
+                <div>
+                    <strong>
+                        Total Company
+                    </strong>
+                </div>
+                <div>
+                    <strong>
+                        {{ $company_count }}
+                    </strong>
+                </div>
+            </div>
+            <div class="card col-md-4 text-start">
+                <div>
+                    <strong>
+                        Total Banner
+                    </strong>
+                </div>
+                <div>
+                    <strong>
+                        {{ $banner_count }}
+                    </strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="row h1 d-flex justify-content-center mt-5"> On Going Event</div>
+
+        <div class="row">
+            <div id="bannerCarousel" class="carousel slide col-md-8 mb-5 h-100 p-0" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     @foreach ($banners as $banner)
                         <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="{{ $loop->index }}"
@@ -45,42 +88,23 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
-        </div>
-
-        <div class="row d-flex justify-content-evenly">
-            <div class="card col-md-2 text-center">
-                <div class="card-head">
-                    <strong>Total User</strong>
-                </div>
-                <div>
-                    <strong>
-                        {{ $user_count }}
-                    </strong>
-                </div>
-            </div>
-            <div class="card col-md-2 text-center">
-                <div>
-                    <strong>
-                        Total Company
-                    </strong>
-                </div>
-                <div>
-                    <strong>
-                        {{ $company_count }}
-                    </strong>
-                </div>
-            </div>
-            <div class="card col-md-2 text-center">
-                <div>
-                    <strong>
-                        Total Banner
-                    </strong>
-                </div>
-                <div>
-                    <strong>
-                        {{ $banner_count }}
-                    </strong>
+            <div class="card col-md-4 justify-content-center">
+                <div class="card-header">Closest Birthday</div>
+                <div class="card-body">
+                    @if (count($closestBirthdays) > 0)
+                        <ul>
+                            @foreach ($closestBirthdays as $birthday)
+                                <li>
+                                    <strong>{{ $birthday['user']->name }} <br> </strong>
+                                    Birthday:
+                                    {{ \Carbon\Carbon::parse($birthday['user']->date_of_birth)->format('j F Y') }}
+                                    <br>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p>No birthdays available.</p>
+                    @endif
                 </div>
             </div>
         </div>
